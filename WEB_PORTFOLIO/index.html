@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fullscreen Scroll Images with Text</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* Each section occupies one scroll length */
+    .section {
+      position: relative;
+      height: 200vh; /* first half = image, second half = text reveal */
+    }
+
+    /* Sticky image layer */
+    .image-layer {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    .image-layer img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Fade effect while scrolling */
+    .image-layer::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: black;
+      opacity: 0;
+      pointer-events: none;
+      animation: fadeOverlay linear both;
+      animation-timeline: view();
+      animation-range: entry 60% exit 100%;
+    }
+
+    @keyframes fadeOverlay {
+      from { opacity: 0; }
+      to { opacity: 0.45; }
+    }
+
+    /* Text block appears AFTER image */
+    .text-layer {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem;
+      text-align: center;
+    }
+
+    .text-layer h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      color: white;
+      max-width: 900px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: textFadeUp linear both;
+      animation-timeline: view();
+      animation-range: entry 20% entry 60%;
+    }
+
+    @keyframes textFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="section">
+    <div class="image-layer">
+      <img src="images/1" alt="Image 1">
+    </div>
+    <div class="text-layer">
+      <h1>Bicycle saddle design and 3d printing https://cults3d.com/en/3d-model/gadget/bike-saddle</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="image-layer">
+      <img src="images/2" alt="Image 2">
+    </div>
+    <div class="text-layer">
+      <h1>fefreff3fr3rf</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="image-layer">
+      <img src="images/3" alt="Image 3">
+    </div>
+    <div class="text-layer">
+      <h1>hell nooo</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="image-layer">
+      <img src="images/4" alt="Image 4">
+    </div>
+    <div class="text-layer">
+      <h1>3D modelling and 3d printing shoes</h1>
+    </div>
+  </section>
+
+</body>
+</html>
